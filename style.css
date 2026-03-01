@@ -513,10 +513,23 @@ mark {
   padding: 8px 16px;
   border-radius: 30px;
   transition: var(--transition);
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideIn 0.4s ease forwards;
+  animation-delay: calc(var(--i) * 0.08s);
 }
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .company-item:hover {
   color: #fff;
   border-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 .company-item i {
   font-size: 16px;
@@ -885,11 +898,11 @@ mark {
 }
 
 .resume-row {
-  align-items: stretch;
+  align-items: start;
 }
 
-.single-resume {
-  height: 100%;
+.single-resume + .single-resume {
+  margin-top: 30px;
 }
 
 .resume-title {
@@ -1113,58 +1126,6 @@ mark {
   margin: 10px auto 0;
   line-height: 1.7;
   text-align: center;
-}
-
-/* Currency Toggle */
-.pricing-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin-bottom: 36px;
-}
-
-.toggle-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-dimmed);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.toggle-label.active {
-  color: var(--primary-color);
-}
-
-.currency-switch {
-  position: relative;
-  width: 48px;
-  height: 26px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  cursor: pointer;
-  transition: var(--transition);
-  padding: 0;
-}
-
-.currency-switch:hover {
-  border-color: var(--primary-color);
-}
-
-.switch-knob {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--primary-color);
-  transition: 0.3s ease;
-}
-
-.currency-switch.active .switch-knob {
-  left: 25px;
 }
 
 /* Pricing Grid */
@@ -1573,6 +1534,53 @@ mark {
   color: #999;
 }
 
+/* Map */
+.contact-map {
+  margin-top: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+.contact-map iframe {
+  display: block;
+  filter: grayscale(1) invert(1) contrast(0.9) brightness(0.6);
+  transition: filter var(--transition);
+}
+
+.contact-map:hover iframe {
+  filter: grayscale(0.3) invert(1) contrast(0.9) brightness(0.7);
+}
+
+/* Form Status Message */
+.form-status {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 4px;
+  min-height: 20px;
+  transition: var(--transition);
+}
+
+.form-status.success {
+  color: #22c55e;
+}
+
+.form-status.error {
+  color: #ef4444;
+}
+
+/* Remix spin animation for loader */
+.ri-spin {
+  display: inline-block;
+  animation: riSpin 1s linear infinite;
+}
+
+@keyframes riSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ===================================================================
    THEME BUTTON
    =================================================================== */
@@ -1656,7 +1664,7 @@ mark {
    =================================================================== */
 .back-to-top {
   position: fixed;
-  bottom: 30px;
+  bottom: 80px;
   right: 30px;
   width: 46px;
   height: 46px;

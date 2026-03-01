@@ -202,9 +202,64 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ── Contact Form ──
+  // ── Contact Form (EmailJS) ──
   const contactForm = document.getElementById("contactForm");
-  if (contactForm) {
+  if (
+    contactForm &&
+    typeof emailjs !== "undefined" &&
+    typeof CONFIG !== "undefined"
+  ) {
+    emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
+
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("submitBtn");
+      const status = document.getElementById("formStatus");
+      const originalText = btn.innerHTML;
+
+      // Loading state
+      btn.innerHTML = 'Sending... <i class="ri-loader-4-line ri-spin"></i>';
+      btn.disabled = true;
+      status.textContent = "";
+      status.className = "form-status";
+
+      emailjs
+        .sendForm(
+          CONFIG.EMAILJS_SERVICE_ID,
+          CONFIG.EMAILJS_TEMPLATE_ID,
+          contactForm,
+        )
+        .then(() => {
+          btn.innerHTML = 'Message Sent! <i class="ri-check-line"></i>';
+          btn.style.background = "#22c55e";
+          status.textContent = "Your message has been sent successfully!";
+          status.classList.add("success");
+          contactForm.reset();
+
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = "";
+            btn.disabled = false;
+          }, 3000);
+        })
+        .catch((err) => {
+          console.error("EmailJS Error:", err);
+          btn.innerHTML =
+            'Failed! Try Again <i class="ri-error-warning-line"></i>';
+          btn.style.background = "#ef4444";
+          status.textContent =
+            "Something went wrong. Please try again or email directly.";
+          status.classList.add("error");
+
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = "";
+            btn.disabled = false;
+          }, 3000);
+        });
+    });
+  } else if (contactForm) {
+    // Fallback if EmailJS not loaded
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const btn = contactForm.querySelector('button[type="submit"]');
@@ -212,7 +267,6 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.innerHTML = 'Message Sent! <i class="ri-check-line"></i>';
       btn.style.background = "#22c55e";
       btn.disabled = true;
-
       setTimeout(() => {
         btn.innerHTML = originalText;
         btn.style.background = "";
@@ -235,63 +289,6 @@ document.addEventListener("DOMContentLoaded", () => {
       iframe.closest(".project-preview").classList.add("iframe-error");
     });
   });
-
-  // ── Pricing Currency Toggle ──
-  const currencyToggle = document.getElementById("currencyToggle");
-  if (currencyToggle) {
-    const inrLabel = document.querySelector('[data-currency="inr"]');
-    const usdLabel = document.querySelector('[data-currency="usd"]');
-    let isUSD = false;
-
-    function formatNumber(num, currency) {
-      if (currency === "inr") {
-        return num.toLocaleString("en-IN");
-      }
-      return num.toLocaleString("en-US");
-    }
-
-    function updatePrices() {
-      document.querySelectorAll(".price[data-inr]").forEach((el) => {
-        const symbol = el.querySelector(".currency-symbol");
-        const value = el.querySelector(".price-value");
-        if (isUSD) {
-          symbol.textContent = "$";
-          value.textContent = formatNumber(parseInt(el.dataset.usd), "usd");
-        } else {
-          symbol.textContent = "₹";
-          value.textContent = formatNumber(parseInt(el.dataset.inr), "inr");
-        }
-      });
-    }
-
-    currencyToggle.addEventListener("click", () => {
-      isUSD = !isUSD;
-      currencyToggle.classList.toggle("active", isUSD);
-      inrLabel.classList.toggle("active", !isUSD);
-      usdLabel.classList.toggle("active", isUSD);
-      updatePrices();
-    });
-
-    inrLabel.addEventListener("click", () => {
-      if (isUSD) {
-        isUSD = false;
-        currencyToggle.classList.remove("active");
-        inrLabel.classList.add("active");
-        usdLabel.classList.remove("active");
-        updatePrices();
-      }
-    });
-
-    usdLabel.addEventListener("click", () => {
-      if (!isUSD) {
-        isUSD = true;
-        currencyToggle.classList.add("active");
-        usdLabel.classList.add("active");
-        inrLabel.classList.remove("active");
-        updatePrices();
-      }
-    });
-  }
 
   // ── Force Download CV ──
   const downloadBtn = document.getElementById("downloadCV");

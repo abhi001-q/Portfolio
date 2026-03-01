@@ -1,25 +1,3 @@
-/* ===================================================================
-   Projects — Data + Renderer (Single Source of Truth)
-   ===================================================================
-   To add a new project, add an object to the PROJECTS array below.
-   Both index.html and works.html render from this file automatically.
-
-   Props:
-   ─────────────────────────────────────────────────────────────────
-   id          : Unique identifier (string)
-   title       : Project name displayed on the card
-   category    : Space-separated categories for filtering
-                 (e.g. "fullstack", "frontend", "react")
-   subtitle    : Label shown above the title (e.g. "Full-Stack")
-   liveUrl     : URL to the live site (null if not live)
-   image       : Fallback/cover image URL (used when no liveUrl)
-   iframeTitle : Title attribute for the live preview iframe
-   fallbackIcon: Remix icon class for the iframe fallback overlay
-   fallbackBg  : CSS gradient for the iframe fallback background
-   comingSoon  : true if project is not yet launched
-   showOnHome  : true to display on the homepage preview grid
-   =================================================================== */
-
 const PROJECTS = [
   {
     id: "secure-nepal",
@@ -36,9 +14,7 @@ const PROJECTS = [
   },
 ];
 
-/* ===================================================================
-   Reusable Card Builder + Auto Renderer
-   =================================================================== */
+
 
 function buildProjectCard(project, index) {
   const delay = (0.1 + index * 0.05).toFixed(2);
@@ -89,12 +65,12 @@ function buildProjectCard(project, index) {
     </div>`;
 }
 
-// Auto-render into any container with id="projectsGrid"
+
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("projectsGrid");
   if (!grid) return;
 
-  // Only render projects where showOnHome is true
+  
   const visible = PROJECTS.filter((p) => p.showOnHome);
   grid.innerHTML = visible.map((p, i) => buildProjectCard(p, i)).join("");
 });
