@@ -122,26 +122,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ── Portfolio Filter ──
+  // ── Portfolio Filter (works on dynamically rendered items) ──
   const filterBtns = document.querySelectorAll(".filter-btns-one li");
-  const projectItems = document.querySelectorAll(
-    ".projects-grid .project-item",
-  );
 
   if (filterBtns.length > 0) {
     filterBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
-        // Set active
         filterBtns.forEach((b) => b.classList.remove("current"));
         btn.classList.add("current");
 
         const filter = btn.dataset.filter;
+        const items = document.querySelectorAll(".projects-grid .project-item");
 
-        projectItems.forEach((item) => {
+        items.forEach((item) => {
           const categories = (item.dataset.category || "").split(" ");
           if (filter === "all" || categories.includes(filter)) {
             item.classList.remove("hidden");
-            // Re-trigger GSAP
             if (typeof gsap !== "undefined") {
               gsap.fromTo(
                 item,
