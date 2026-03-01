@@ -32,7 +32,7 @@ const PROJECTS = [
     fallbackIcon: "ri-shield-check-line",
     fallbackBg: "linear-gradient(135deg, #0a1628, #162544)",
     comingSoon: false,
-    showOnHome: false,
+    showOnHome: true,
   },
 ];
 
