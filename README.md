@@ -2,8 +2,6 @@
 
 A modern, responsive personal portfolio website built with vanilla HTML, CSS, and JavaScript.
 
-![Portfolio Preview](profile.jpeg)
-
 ## 🔗 Live Demo
 
 [View Portfolio](https://abhi001-q.github.io/Portfolio)
@@ -22,12 +20,12 @@ A modern, responsive personal portfolio website built with vanilla HTML, CSS, an
 
 ## 📄 Pages
 
-| Page | Description |
-|------|-------------|
-| `index.html` | Homepage — hero, tech stack, projects preview, stats, CTA |
-| `about.html` | About — bio, skills, education, experience, services, pricing |
-| `works.html` | Works — full project gallery with category filters |
-| `contact.html` | Contact — form (EmailJS), info, Google Maps embed |
+| Page           | Description                                                   |
+| -------------- | ------------------------------------------------------------- |
+| `index.html`   | Homepage — hero, tech stack, projects preview, stats, CTA     |
+| `about.html`   | About — bio, skills, education, experience, services, pricing |
+| `works.html`   | Works — full project gallery with category filters            |
+| `contact.html` | Contact — form (EmailJS), info, Google Maps embed             |
 
 ## 🛠️ Tech Stack
 
@@ -45,24 +43,29 @@ Portfolio/
 ├── about.html          # About page
 ├── works.html          # Works/Projects page
 ├── contact.html        # Contact page
-├── style.css           # All styles
-├── script.js           # Main JavaScript
-├── projects.js         # Project data + renderer
-├── config.js           # EmailJS credentials (gitignored)
-├── profile.jpeg        # Profile photo
-├── Resume.png          # Downloadable resume
-└── .gitignore
+├── README.md
+├── css/
+│   └── style.css       # All styles
+├── js/
+│   ├── script.js       # Main JavaScript
+│   ├── projects.js     # Project data + renderer
+│   └── config.js       # EmailJS credentials (gitignored)
+└── images/
+    ├── profile.jpeg    # Profile photo
+    └── Resume.png      # Downloadable resume
 ```
 
 ## 🚀 Getting Started
 
 1. **Clone the repo**
+
    ```bash
    git clone https://github.com/abhi001-q/Portfolio.git
    cd Portfolio
    ```
 
-2. **Create `config.js`** (for contact form)
+2. **Create `js/config.js`** (for contact form)
+
    ```js
    const CONFIG = {
      EMAILJS_PUBLIC_KEY: "your_public_key",
