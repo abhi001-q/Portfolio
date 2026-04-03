@@ -4,11 +4,10 @@ A modern, responsive personal portfolio website built with vanilla HTML, CSS, an
 
 ## 🔗 Live Demo
 
-[View Portfolio](https://abhi001-q.github.io/Portfolio)
+[View Portfolio](https://portfolio-lac-seven-56.vercel.app/)
 
 ## ✨ Features
 
-- **Bento Grid Layout** — Modern card-based design inspired by bento UI trends
 - **Responsive Design** — Fully responsive across desktop, tablet, and mobile
 - **GSAP Animations** — Smooth scroll-triggered animations and page transitions
 - **Dynamic Projects** — Data-driven project cards rendered from a single source (`projects.js`)
